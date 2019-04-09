@@ -70,7 +70,7 @@ class ClientTool(object):
         parser.add_argument("--port", help="specify location ai service port", type=str, required=True)
         parser.add_argument("--from-date", help="specify the start date to prepare graph for", type=str, required=False)
         parser.add_argument("--to-date", help="specify the end date to prepare graph for", type=str, required=False)
-        parser.add_argument("--threshold", help="specify the end date to prepare graph for", type=int, default=5000)
+        parser.add_argument("--threshold", help="specify number of data to be loaded at a time while loading", type=int, default=5000)
         parser.add_argument("--num", help="specify top n number of records to build graph for", type=int, default=10)
         self.args = parser.parse_args()
 
