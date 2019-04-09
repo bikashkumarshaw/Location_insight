@@ -28,7 +28,7 @@ Now install all the dependencies as listed below
 python routes.py --dbname `provide your postgresql db name` --username `provide your postgresql username` --port `provide the port to run service`
 ```
 
-## APIS supported:
+## API'S supported:
 
 ```
 area_data (returns data of specified area having highest demand)
