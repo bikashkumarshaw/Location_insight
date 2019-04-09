@@ -1,9 +1,6 @@
 from flask import Flask, request
 import json
 import psycopg2
-import plotly.plotly as py
-import plotly.graph_objs as go
-import plotly
 
 from args import _define_args
 from queries import SQL_QUERY
