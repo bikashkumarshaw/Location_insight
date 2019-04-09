@@ -146,7 +146,8 @@ def get_area_data():
     for rec in data:
         user_data["user_id"] = rec[0][0]
         user_data["no_of_times_booked"] = rec[1]
-        user_data["to_area_code"] = rec[2]
+        user_data["to_area_code"] =  rec[2]
+        user_data["travel_type"] = [area.replace("1", "long distance").replace("2", "point to point").replace("3", "hourly rental") for area in rec[3]]
         analyzed_data.append(user_data)
         user_data = {}
 
