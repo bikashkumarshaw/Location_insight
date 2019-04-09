@@ -6,11 +6,11 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly
 
-class FileReader(object):
+class ClientTool(object):
 
     def run(self):
         self.define_args()
-        if self.args.prepare_graph:
+        if self.args.prepare_graph!="false":
             self.prepare_graph()
         else:
             self.load_data()
@@ -23,7 +23,7 @@ class FileReader(object):
         reader = csv.DictReader( csvfile, fieldnames)
         out = []
         for row in reader:
-            if len(out)==1000:
+            if len(out)==self.args.threshold:
                 r = requests.post("http://{0}:{1}/api/load_data".format(self.args.ip, self.args.port), \
                 data=json.dumps(dict(value=out)), headers={'Content-Type': 'application/json'})
                 out = []
@@ -38,7 +38,13 @@ class FileReader(object):
             print r.json()
 
     def prepare_graph(self):
-        r = requests.get("http://{0}:{1}/api/get_demand?fromdate=10/3/2013&todate=11/3/2013&num=5".format(self.args.ip, self.args.port))
+        if self.args.prepare_graph=="for_all":
+            r = requests.get("http://{0}:{1}/api/get_demand?num={2}"\
+            .format(self.args.ip, self.args.port, self.args.num))
+        elif self.args.prepare_graph=="for_range":
+            r = requests.get("http://{0}:{1}/api/get_demand?fromdate={2}&todate={3}&num={4}"\
+            .format(self.args.ip, self.args.port, self.args.from_date, self.args.to_date, self.args.num))
+
         resp = r.json()["result"]
         area = []
         bookings = []
@@ -52,19 +58,21 @@ class FileReader(object):
         trace2 = go.Bar(x=area, y=canceled, name='canceled')
         data = [trace1, trace2]
 
-        plotly.offline.plot({"data": data, "layout": go.Layout(xaxis=go.layout.XAxis(title=go.layout.xaxis.Title(text='area code')), yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of bookings')))})
-
-        #k = plotly.offline.plot({"data": [go.Bar(x=area, y=bookings)], "layout": go.Layout(xaxis=go.layout.XAxis(title=go.layout.xaxis.Title(text='area code')), yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of bookings')))})
-
-        #m = plotly.offline.plot({"data": [go.Bar(x=area, y=canceled)], "layout": go.Layout(xaxis=go.layout.XAxis(title=go.layout.xaxis.Title(text='area code')), yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of cancelations')))})
+        plotly.offline.plot({"data": data, \
+        "layout": go.Layout(xaxis=go.layout.XAxis(title=go.layout.xaxis.Title(text='area code')), \
+        yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of bookings')))})
 
     def define_args(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--file", help="Specify the csv file path location", type=str)
-        parser.add_argument("--prepare-graph", help="set this to true to get graph of demand", type=bool, default=False)
-        parser.add_argument("--ip", help="specify location ai service ip", type=str)
-        parser.add_argument("--port", help="specify location ai service port", type=str)
+        parser.add_argument("--prepare-graph", help="for_all -> graph of top 10 area, for_range -> graph of top 10 area in a range of date specified", type=str, default="false")
+        parser.add_argument("--ip", help="specify location ai service ip", type=str, required=True)
+        parser.add_argument("--port", help="specify location ai service port", type=str, required=True)
+        parser.add_argument("--from-date", help="specify the start date to prepare graph for", type=str, required=False)
+        parser.add_argument("--to-date", help="specify the end date to prepare graph for", type=str, required=False)
+        parser.add_argument("--threshold", help="specify the end date to prepare graph for", type=int, default=5000)
+        parser.add_argument("--num", help="specify top n number of records to build graph for", type=int, default=10)
         self.args = parser.parse_args()
 
 if __name__== "__main__":
-    FileReader().run()
+    ClientTool().run()

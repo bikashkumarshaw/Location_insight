@@ -1,18 +1,18 @@
 from flask import Flask, request
 import json
 import psycopg2
-from datetime import date
 import plotly.plotly as py
 import plotly.graph_objs as go
 import plotly
+
+from args import _define_args
 from queries import SQL_QUERY
-#from apis import APIS
 
 app = Flask(__name__)
 
-CONN = psycopg2.connect("dbname = local_ai user = bikashshaw")
+ARGS = _define_args()
+CONN = psycopg2.connect("dbname = {0} user = {1}".format(ARGS.dbname, ARGS.username))
 cur = CONN.cursor()
-#api_obj = APIS(cur)
 
 @app.route("/api/load_data", methods=["POST"])
 def load_data():
@@ -155,4 +155,4 @@ def get_area_data():
     return json.dumps({"result": analyzed_data[:num]})
 
 if __name__=="__main__":
-    app.run(debug=True, port=3344)
+    app.run(debug=True, port=ARGS.port)
