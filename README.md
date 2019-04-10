@@ -27,7 +27,7 @@ Now install all the dependencies as listed below
 
 ## Run command:
 ```
-python routes.py --dbname `provide your postgresql db name` --username `provide your postgresql username` --port `provide the port to run service`
+python routes.py --dbname `provide your postgresql db name` --username `provide your postgresql username` --port `provide the port to run service` --password `specify the password of postgresql user`
 ```
 
 ## API'S supported:
