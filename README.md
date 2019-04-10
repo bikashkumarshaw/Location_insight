@@ -4,6 +4,21 @@
 
 #### Note you would need postgresql installed in your system for this.
 
+## Install postgresql
+```
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+```
+
+## Create username and db for postgresql
+```
+sudo -u postgres createuser <username>
+sudo -u postgres createdb <dbname>
+sudo -u postgres psql
+alter user <username> with encrypted password '<password>';
+grant all privileges on database <dbname> to <username> ;
+```
+
 ## Clone:
 ```
 git clone https://github.com/bikashkumarshaw/Location_insight.git
