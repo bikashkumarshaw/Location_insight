@@ -2,6 +2,8 @@
 
 #### This service helps in analyzing travel data of cabs booked. 
 
+#### Note you would need postgresql installed in your system for this.
+
 ## Clone:
 ```
 git clone https://github.com/bikashkumarshaw/Location_insight.git
