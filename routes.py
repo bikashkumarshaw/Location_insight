@@ -8,7 +8,9 @@ from queries import SQL_QUERY
 app = Flask(__name__)
 
 ARGS = _define_args()
-CONN = psycopg2.connect("dbname = {0} user = {1} host=localhost password={2}".format(ARGS.dbname, ARGS.username, ARGS.password))
+CONN = psycopg2.connect("dbname = {0} user = {1} host=localhost password={2}"\
+.format(ARGS.dbname, ARGS.username, ARGS.password))
+
 cur = CONN.cursor()
 
 @app.route("/api/load_data", methods=["POST"])
