@@ -153,4 +153,4 @@ def get_area_data():
     return json.dumps({"result": analyzed_data[:num]})
 
 if __name__=="__main__":
-    app.run(debug=True, port=ARGS.port)
+    app.run(debug=True, host=ARGS.ip, port=ARGS.port)
