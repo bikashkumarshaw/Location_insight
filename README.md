@@ -48,12 +48,14 @@ python routes.py --dbname `provide your postgresql db name` --username `provide 
 ## API'S supported:
 
 ```
-area_data (returns data of specified area having highest demand)
+area_data (returns users data of specified area sorted with respect to max bookings made by a user)
 get_demand (returns data of areas having highest demand)
 load_data (loads data to postgresql)
 ```
 
 ## get_demand
+
+#### This api is used to areas with top 20 bookings, it gives us the insight of highest demand in areas. The api returns number cancellation made in each area and if the booking was made through mobile_site_booking. we can also sort the results based on max cancellation percentage this would tell us the areas facing lot of cancelation of rides due to burst in demand.
 
 ### Positional params:
 
@@ -228,6 +230,8 @@ Ref: http://127.0.0.1:3344/api/get_demand?fromdate=10/3/2013&todate=11/3/2013&so
 ```
 
 ## area_data
+
+#### Once we know the top 20 areas having highest demand we would like to look into info of each of these areas, this api supports insights of specified area, It gives us users who made maximum number of bookings in the area, where they are heading to, number of times they made bookings from the area and type of travel made by them, this info can be used to know valuable customers and provide some benifits to persons regularly moving from this area to a regular area.
 
 ### Positional params:
 
