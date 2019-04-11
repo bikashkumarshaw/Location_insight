@@ -154,5 +154,32 @@ def get_area_data():
 
     return json.dumps({"result": analyzed_data[:num]})
 
+@app.route("/api/time_data")
+def get_time():
+    num = request.args.get("num", 20)
+    start_time = request.args.get("start_time", "")
+    end_time = request.args.get("end_time", "")
+
+    if not start_time or not end_time:
+        return json.dumps({"error": "please specify both start and end time"})
+
+    sq_query = SQL_QUERY.get("time_data", "")
+    sq_query = sq_query%(start_time, end_time)
+    cur.execute(sq_query)
+    data = cur.fetchall()
+
+    area_data = {}
+    analyzed_data = []
+    for rec in data:
+        area_data["area_id"] = rec[0][0]
+        area_data["bookings_made"] = int(rec[1])
+        area_data["time"] = rec[2][0]
+        analyzed_data.append(area_data)
+        area_data = {}
+
+    analyzed_data = sorted(analyzed_data, key=lambda x: x["bookings_made"], reverse=True)
+
+    return json.dumps({"result": analyzed_data[:num]})
+
 if __name__=="__main__":
     app.run(debug=True, host=ARGS.ip, port=ARGS.port)
