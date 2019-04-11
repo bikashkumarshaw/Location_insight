@@ -50,6 +50,7 @@ python routes.py --dbname `provide your postgresql db name` --username `provide 
 ```
 get_demand (returns data of areas having highest demand)
 area_data (returns users data of specified area sorted with respect to max bookings made by a user)
+time_data (returns data of areas having highest demand in a time range, this can be used to see areas having highest demand at a given time)
 load_data (loads data to postgresql)
 ```
 
@@ -354,3 +355,21 @@ Ref: http://127.0.0.1:3344/api/area_data?area_code=393&fromdate=10/3/2013&todate
 
 Ref: http://127.0.0.1:3344/api/area_data?area_code=393&fromdate=10/3/2013&todate=11/3/2013
 
+## time_data:
+
+#### This api provides areas where the booking rates are highest at a given time.
+
+**num:**
+
+* #### num specifies the number of results to be shown, eg num=2. the default value of num=20.
+
+
+**start_time:**
+
+Takes start time in (9:00) format
+
+**end_time:**
+
+Takes end time in (21:00) format
+
+Ref: http://127.0.0.1:3344/api/time_data?start_time=9:00&end_time=11:00
