@@ -366,10 +366,10 @@ Ref: http://127.0.0.1:3344/api/area_data?area_code=393&fromdate=10/3/2013&todate
 
 **start_time:**
 
-Takes start time in (9:00) format
+* Takes start time in (9:00) format
 
 **end_time:**
 
-Takes end time in (21:00) format
+* Takes end time in (21:00) format
 
 Ref: http://127.0.0.1:3344/api/time_data?start_time=9:00&end_time=11:00
