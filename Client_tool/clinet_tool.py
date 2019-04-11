@@ -60,16 +60,16 @@ class ClientTool(object):
 
         plotly.offline.plot({"data": data, \
         "layout": go.Layout(xaxis=go.layout.XAxis(title=go.layout.xaxis.Title(text='area code')), \
-        yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of bookings')))})
+        yaxis=go.layout.YAxis(title=go.layout.yaxis.Title(text='no of bookings')), title='{0} - {1}'.format(self.args.from_date, self.args.to_date))})
 
     def define_args(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--file", help="Specify the csv file path location", type=str)
         parser.add_argument("--prepare-graph", help="for_all -> graph of top 10 area, for_range -> graph of top 10 area in a range of date specified", type=str, default="false")
-        parser.add_argument("--ip", help="specify location ai service ip", type=str, required=True)
+        parser.add_argument("--ip", help="specify location_ai service ip", type=str, required=True)
         parser.add_argument("--port", help="specify location ai service port", type=str, required=True)
-        parser.add_argument("--from-date", help="specify the start date to prepare graph for", type=str, required=False)
-        parser.add_argument("--to-date", help="specify the end date to prepare graph for", type=str, required=False)
+        parser.add_argument("--from-date", help="specify the start date to prepare graph for", type=str, required=False, default='all')
+        parser.add_argument("--to-date", help="specify the end date to prepare graph for", type=str, required=False, default='all')
         parser.add_argument("--threshold", help="specify number of data to be loaded at a time while loading", type=int, default=5000)
         parser.add_argument("--num", help="specify top n number of records to build graph for", type=int, default=10)
         self.args = parser.parse_args()
