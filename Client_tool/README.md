@@ -46,7 +46,7 @@ python clinet_tool.py --prepare-graph for_all --ip 127.0.0.1 --port 3344
 
 graph view:
 
-![](https://i.imgur.com/7uX6Jql.png)
+![](https://i.imgur.com/HJGuUq0.png)
 
 ## To prepare graph within a range of date(shows top 10 areas booking and cancelation graph within a given range)
 
@@ -58,4 +58,6 @@ python clinet_tool.py --prepare-graph for_range --ip 127.0.0.1 --port 3344 --fro
 
 graph view:
 
-![](https://i.imgur.com/aOPo6u3.png)
+![](https://i.imgur.com/jk44B7P.png)
+
+```
