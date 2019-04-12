@@ -357,7 +357,7 @@ Ref: http://127.0.0.1:3344/api/area_data?area_code=393&fromdate=10/3/2013&todate
 
 ## time_data:
 
-#### This api provides areas where the booking rates are highest at a given time.
+#### This api provides areas where the booking rates are highest at a given time. It can be used to analyze the peak times of booking.
 
 **num:**
 
