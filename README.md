@@ -372,4 +372,41 @@ Ref: http://127.0.0.1:3344/api/area_data?area_code=393&fromdate=10/3/2013&todate
 
 * Takes end time in (21:00) format
 
+```jsond
+{
+  "result": [
+    {
+      "area_id": "393",
+      "bookings_made": 630,
+      "time": "11:05"
+    },
+    {
+      "area_id": "571",
+      "bookings_made": 315,
+      "time": "09:21"
+    },
+    {
+      "area_id": "293",
+      "bookings_made": 244,
+      "time": "09:36"
+    },
+    {
+      "area_id": "585",
+      "bookings_made": 142,
+      "time": "11:04"
+    },
+    {
+      "area_id": "1026",
+      "bookings_made": 138,
+      "time": "11:01"
+    },
+    {
+      "area_id": "1010",
+      "bookings_made": 137,
+      "time": "10:04"
+    }
+  ]
+}
+```
+
 Ref: http://127.0.0.1:3344/api/time_data?start_time=9:00&end_time=11:00
